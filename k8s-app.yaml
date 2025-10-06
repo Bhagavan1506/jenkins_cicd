@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: user-service-container
-          image: ''
+          image: 'bhagavanbongi/springboot-docker-v2'
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8085
