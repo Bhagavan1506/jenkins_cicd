@@ -1,0 +1,5 @@
+MACOS
+sed -i '' "s|image: '${IMAGE_NAME}:${IMAGE_TAG}'|g" k8s-app.yaml
+
+Ubuntu
+sed -i "s|image: ''|image: '${IMAGE_NAME}:${IMAGE_TAG}'|g" k8s-app.yaml
