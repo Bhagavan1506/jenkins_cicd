@@ -35,7 +35,7 @@ spec:
   selector:
     app: spring-boot-k8s
   ports:
-    - protocol: UDP
+    - protocol: TCP
       port: 8089
       targetPort: 8085
   type: NodePort
