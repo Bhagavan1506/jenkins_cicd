@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: user-service-container
-          image: 'bhagavanbongi/springboot-docker1'
+          image: 'bhagavanbongi/springboot-docker'
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8085
@@ -38,4 +38,4 @@ spec:
     - protocol: TCP
       port: 8089
       targetPort: 8085
-  type: NodePort
+  type: ClusterIP
