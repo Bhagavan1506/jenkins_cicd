@@ -17,7 +17,6 @@ spec:
   metadata:
     labels:
       app: spring-boot-k8s
-
     spec:
       containers:
         - name: user-service-container
