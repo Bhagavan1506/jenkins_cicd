@@ -9,7 +9,7 @@ pipeline{
     environment{
            APP_NAME = "springboot-docker-cicd"
            RELEASE_NO= "1.0.0"
-           DOCKER_USER= "javaexpress"
+           DOCKER_USER= "bhagavanbongi"
            IMAGE_NAME= "${DOCKER_USER}"+"/"+"${APP_NAME}"
            IMAGE_TAG= "${RELEASE_NO}-${BUILD_NUMBER}"
     }
@@ -41,7 +41,7 @@ pipeline{
         stage("Deploy Image to Hub"){
             steps{
                  withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'DOCKER_HUB')]) {
-                 sh 'docker login -u javaexpress -p ${DOCKER_HUB}'
+                 sh 'docker login -u bhagavanbongi -p ${DOCKER_HUB}'
                  sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
