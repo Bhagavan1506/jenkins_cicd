@@ -40,8 +40,8 @@ pipeline{
 
         stage("Deploy Image to Hub"){
             steps{
-                withCredentials([string(credentialsId: 'dp', variable: 'dp')]) {
-                 sh 'docker login -u bhagavanbongi -p ${dp}'
+                withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'DOCKER_HUB')]) {
+                 sh 'docker login -u bhagavanbongi -p ${DOCKER_HUB}'
                  sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
