@@ -1,9 +1,7 @@
----
 apiVersion: v1
 kind: Namespace
 metadata:
   name: develop
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -22,7 +20,7 @@ spec:
     spec:
       containers:
         - name: user-service-container
-          image: ""
+          image: ''
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8085
