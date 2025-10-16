@@ -1,15 +1,16 @@
+
 pipeline{
 
     agent any
     
     tools{
-        maven "maventool"
+        maven "maven"
     }
 
     environment{
            APP_NAME = "springboot-docker-cicd"
            RELEASE_NO= "1.0.0"
-           DOCKER_USER= "javaexpress"
+           DOCKER_USER= "bhagavanbongi"
            IMAGE_NAME= "${DOCKER_USER}"+"/"+"${APP_NAME}"
            IMAGE_TAG= "${RELEASE_NO}-${BUILD_NUMBER}"
     }
@@ -18,7 +19,7 @@ pipeline{
 
         stage("SCM checkout"){
             steps{
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/javatechie-devops/jenkins-ci-cd.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Bhagavan1506/jenkins_cicd.git']])
             }
         }
 
@@ -40,8 +41,8 @@ pipeline{
 
         stage("Deploy Image to Hub"){
             steps{
-                 withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'DOCKER_HUB')]) {
-                 sh 'docker login -u javaexpress -p ${DOCKER_HUB}'
+                withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'DOCKER_HUB')]) {
+                 sh 'docker login -u bhagavanbongi -p ${DOCKER_HUB}'
                  sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
@@ -51,7 +52,10 @@ pipeline{
 		{
 			steps {
 				sh """
-				    sed -i "s|image: ''|image: '${IMAGE_NAME}:${IMAGE_TAG}'|g" k8s-app.yaml
+					//MacOS
+					//sed -i '' "s|image: '${IMAGE_NAME}:${IMAGE_TAG}'|g" k8s-app.yaml
+					//Ubuntu
+					sed -i "s|image: ''|image '${IMAGE_NAME}:${IMAGE_TAG}'|g" k8s-app.yaml
 		   		   """
 				sh 'kubectl apply -f k8s-app.yaml'
 		}
